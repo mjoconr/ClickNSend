@@ -103,7 +103,7 @@ Multiple Bodies:
 ![Fusion360_beVK8jCO7B](https://github.com/user-attachments/assets/7a115d7e-2e1b-4131-947d-5d5f7048d1cb)
 ![ll8fckRHFy](https://github.com/user-attachments/assets/0c34e3db-9f8e-4789-885a-ea942264733e)
 
-__Note:__ 
+__Note:__  
 **1-** The add-in does not include any 3D packing or size verification to check whether objects will fit on your 3D printer's build plate. It assumes you are familiar with your 3D printer's dimensions and capabilities. Since the code is open-source, you're welcome to modify it to add these features if needed.  
 **2-** Once you send multiple bodies to Orca Slicer, you need to adjust their positions and orientations inside Orca (or your own Slicer). Currently, there is no effort to optimize it from my side. (Please see the end of the former note.)
 
