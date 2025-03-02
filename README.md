@@ -65,64 +65,23 @@ Once installed, ClickNSend integrates directly into your Fusion 360 interface, p
 <summary>Click to expand Installation and Setup</summary>
 
 1. Start Fusion 360 and click `Utilities` and `Scripts and Add-Ins` (or press `Shift+S` on Windows).
-<table style="border: none;">
-  <tr style="border: none;">
-    <td style="border: none;">
-      <img src="https://github.com/user-attachments/assets/fa33e860-1219-4ee7-be45-ec94c3fd5ed9" alt="Fusion360_MWHySdwzPN">
-    </td>
-    <td style="border: none;">
-      <img src="https://github.com/user-attachments/assets/b8043e39-ee93-4983-9c6a-c30b2249a2d2" alt="Fusion360_IQ7TtftQDs">
-    </td>
-  </tr>
-</table>
+![Fusion360_MWHySdwzPN](https://github.com/user-attachments/assets/d7297c58-c862-4caa-b3af-4c2d90b38292)
+![Fusion360_IQ7TtftQDs](https://github.com/user-attachments/assets/384f651b-8479-4382-bd3c-f5208aef79a5)
 
 2. Once the `Script and Add-Ins` opened, click on the `Add-Ins` tab and click the green ➕ icon at the top. This will help you locate your Add-Ins folder. Note the folder path displayed and copy it for reference.
-<table style="border: none;">
-  <tr style="border: none;">
-    <td style="border: none;">
-      <img src="https://github.com/user-attachments/assets/a7af1886-e3e0-485b-b139-e847bad42c81" alt="Fusion360_ZQlCPHgSZn">
-    </td>
-    <td style="border: none;">
-      <img src="https://github.com/user-attachments/assets/d4b58c61-3b39-46b3-94dc-d926604ab85a" alt="Fusion360_SWeHkOoxGB">
-    </td>
-  </tr>
-</table>
+![Fusion360_MUjPGD653B](https://github.com/user-attachments/assets/547c0e1a-0e40-4353-8ca7-af8996bae7b0)
 
 3. Go to GitHub and download `ClickNSend` as a ZIP file, then extract it to your Add-Ins folder (the location you noted in Step 2). You can remove `-main` from the end of the folder if you want to have only `ClickNSend` in your Add-Ins.
-<table style="border: none;">
-  <tr style="border: none;">
-    <td style="border: none;">
-      <img src="https://github.com/user-attachments/assets/8fb5481e-d3a7-4e2b-8326-4a1338dda1f4" alt="chrome_rCk0vdemUi">
-    </td>
-  </tr>
-</table>
+![Fusion360_SWeHkOoxGB](https://github.com/user-attachments/assets/15f50c07-d8e6-4534-aed1-7777bee9d516)
 
 4. Return to Fusion 360 and navigate to the Add-Ins tab (repeat Step 1). You should now see `ClickNSend` in your list of available Add-Ins. Select it and click "Run" at the bottom.
-<table style="border: none;">
-  <tr style="border: none;">
-    <td style="border: none;">
-      <img src="https://github.com/user-attachments/assets/db7f755c-5ba5-453d-acd3-30e0eb9ce238" alt="Fusion360_RxQlbhzfp4">
-    </td>
-  </tr>
-</table>
+![Fusion360_RxQlbhzfp4](https://github.com/user-attachments/assets/ffac7848-9f20-4f20-bb63-1d56bc5f5b57)
 
 __Note:__ If you want ClickNSend to launch automatically whenever you start Fusion 360, check the box labeled `Run on Startup` before clicking Run.
-<table style="border: none;">
-  <tr style="border: none;">
-    <td style="border: none;">
-      <img src="https://github.com/user-attachments/assets/83f2bf59-e84e-4ac4-9d01-ff5c94fb1a19" alt="Fusion360_9AHoh0Iw5t">
-    </td>
-  </tr>
-</table>
+![Fusion360_9AHoh0Iw5t](https://github.com/user-attachments/assets/f3d237b7-fdc4-46c8-9203-f6707f29f547)
 
 5. You should see something similar in your `InsertPanel`.
-<table style="border: none;">
-  <tr style="border: none;">
-    <td style="border: none;">
-      <img src="https://github.com/user-attachments/assets/f321534e-77fc-4cb8-ac9c-d726e3a3903e" alt="Fusion360_cUFjQkscWg">
-    </td>
-  </tr>
-</table>
+![Fusion360_cUFjQkscWg](https://github.com/user-attachments/assets/4beaa395-48d5-4e13-aea2-add79c525758)
 
 </details>
 
@@ -132,33 +91,17 @@ __Note:__ If you want ClickNSend to launch automatically whenever you start Fusi
 <summary>Click to expand Usage of ClickNSend</summary>
 
 1. With your models open in the active window of Fusion 360, select the bodies that you want to send to the slicer. (e.g., sample Cube and Rectangular Box below)
-![Fusion360_K07RrYpt1P](https://github.com/user-attachments/assets/f1b12a16-142d-415e-a1f3-786c72dd20f0)
+![Fusion360_K07RrYpt1P](https://github.com/user-attachments/assets/455bb081-7335-45b4-b099-2708c0dbbc24)
 
 2. Click on the `ClickNSend` icon (3D printer icon in your Fusion 360 Insert panel). That's it! Each selected body will be sent separately to your target slicer with its default settings.
 
 Single Body:
-<table style="border: none;">
-  <tr style="border: none;">
-    <td style="border: none;">
-      <img src="https://github.com/user-attachments/assets/688b3d5c-000b-442f-9f92-c682f53091ec" alt="Fusion360_nUtPGZ4SRt">
-    </td>
-    <td style="border: none;">
-      <img src="https://github.com/user-attachments/assets/198c08ec-f2e9-4cd3-9f86-3fb2d7c39899" alt="EQeUZfO25L">
-    </td>
-  </tr>
-</table>
+![Fusion360_nUtPGZ4SRt](https://github.com/user-attachments/assets/03a7120d-08e9-4306-b0a7-48ccfe0c3b56)
+![EQeUZfO25L](https://github.com/user-attachments/assets/0d38c83d-e902-4a51-86a2-5f25130f290a)
 
 Multiple Bodies:
-<table style="border: none;">
-  <tr style="border: none;">
-    <td style="border: none;">
-      <img src="https://github.com/user-attachments/assets/9869ca10-3676-4845-ac10-ebc06586afe2" alt="Fusion360_beVK8jCO7B">
-    </td>
-    <td style="border: none;">
-      <img src="https://github.com/user-attachments/assets/1aa0f7e4-c012-4007-9bcc-db7ca95e9ca0" alt="ll8fckRHFy">
-    </td>
-  </tr>
-</table>
+![Fusion360_beVK8jCO7B](https://github.com/user-attachments/assets/7a115d7e-2e1b-4131-947d-5d5f7048d1cb)
+![ll8fckRHFy](https://github.com/user-attachments/assets/0c34e3db-9f8e-4789-885a-ea942264733e)
 
 __Note:__ 
 **1-** The add-in does not include any 3D packing or size verification to check whether objects will fit on your 3D printer's build plate. It assumes you are familiar with your 3D printer's dimensions and capabilities. Since the code is open-source, you're welcome to modify it to add these features if needed.  
