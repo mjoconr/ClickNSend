@@ -179,7 +179,8 @@ For questions or contributions, please contact:
 
 - [Fusion 360](https://www.autodesk.com/products/fusion-360/overview) - 3D CAD, CAM, and CAE software.  
 - [Fusion 360 API](https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-A92A4B10-3781-4925-94C6-47DA85A4F65A) - Documentation of Application Programming interface of Fusion 360.  
-- [Orca Slicer](https://github.com/SoftFever/OrcaSlicer) - A 3D printing slicer based on Bambu Studio, PrusaSlicer, and SuperSlicer.  
+- [Orca Slicer](https://github.com/SoftFever/OrcaSlicer) - A 3D printing slicer based on Bambu Studio, PrusaSlicer, and SuperSlicer.
+- [Create A Custom Add-in To Send To 3D Print Utility](https://www.youtube.com/watch?v=9tiyAdgTzyI) - Similar Add-In for single body/ component import.
 
 
 
