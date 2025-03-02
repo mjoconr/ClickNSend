@@ -110,8 +110,9 @@ __Note:__
 </details>
 
 ### Presentation Video <a name="presentation-video"></a>
-
-Coming soon! A video demonstration of the ClickNSend Add-In will be added here.
+<a href="https://www.youtube.com/watch?v=vbnCURtUYJY">
+    <img src="https://github.com/user-attachments/assets/e75340d7-da48-4b0d-aec2-30e0bb146eec" alt="Presentation4">
+</a>
 
 ### Contact <a name="contact"></a>
 
