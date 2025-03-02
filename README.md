@@ -116,7 +116,7 @@ Coming soon! A video demonstration of the ClickNSend Add-In will be added here.
 ### Contact <a name="contact"></a>
 
 For questions or contributions, please contact:
-- GitHub: sinan.bank@colostate.edu
+- Email: sinan.bank@colostate.edu
 
 ### References and Other Software Tools <a name="references-and-other-software-tools"></a>
 
