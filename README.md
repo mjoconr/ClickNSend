@@ -114,6 +114,25 @@ __Note:__
     <img src="https://github.com/user-attachments/assets/e75340d7-da48-4b0d-aec2-30e0bb146eec" alt="Presentation4">
 </a>
 
+### How to change the Slicer from Orca to Another One (e.g., Bambu Studio)
+
+<details>
+<summary>Click to expand changing the Slicer</summary> 
+  
+All you need to do is change [a single line](https://github.com/bankh/ClickNSend/blob/e733f0df66f99213e3aeaa9a870304c122c9e103/commands/commandDialog/entry.py#L119C9-L119C66) while leaving the rest of the code alone. 
+Change the following:
+```
+orcaPath = r"C:\Program Files\OrcaSlicer\orca-slicer.exe"
+```
+To the following:
+```
+orcaPath = r"C:\Program Files\Bambu Studio\bambu-studio.exe"
+```
+Please don't change the variable name since the rest of the program looks for it. After you click the ClickNSend in Fusion 360, Bambu Studio will ask whether you want them as a single object. Say no if you want the sent objects as separate and you need to see something similar to:
+![Fusion360_vAEfnJZvPP](https://github.com/user-attachments/assets/d303866d-97c9-420d-98c5-a1a5870adc5e)
+
+</details>
+
 ### Contact <a name="contact"></a>
 
 For questions or contributions, please contact:
