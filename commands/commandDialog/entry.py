@@ -116,7 +116,8 @@ def command_created(args: adsk.core.CommandEventArgs):
         exportMgr = design.exportManager
         
         # Path to Orca Slicer with proper escaping
-        orcaPath = r"C:\Program Files\OrcaSlicer\orca-slicer.exe"
+        orcaPath = r"C:\Program Files\OrcaSlicer\orca-slicer.exe" # Comment this line and uncomment next one if you want to use Bambu Studio
+        # orcaPath = r"C:\Program Files\Bambu Studio\bambu-studio.exe" # Change the path if your bambu-studio.exe is in another location.
         futil.log(f'Using Orca Slicer path: {orcaPath}')
         
         # List to store all STL file paths
