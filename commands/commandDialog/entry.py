@@ -120,7 +120,7 @@ def command_created(args: adsk.core.CommandEventArgs):
         system = platform.system()
         if system == 'Darwin':  # macOS
             orcaPath = "/Applications/OrcaSlicer.app/Contents/MacOS/orca-slicer"
-            # orcaPath = "/Applications/BambuStudio.app/Contents/MacOS/bambu-studio" # For Bambu Studio
+            # orcaPath = "/Applications/BambuStudio.app/Contents/MacOS/bambustudio" # For Bambu Studio
             futil.log(f'Detected macOS: Using Orca Slicer path: {orcaPath}')
         else:  # Windows or other
             orcaPath = r"C:\Program Files\OrcaSlicer\orca-slicer.exe"
