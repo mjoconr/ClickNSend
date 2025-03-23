@@ -250,19 +250,50 @@ def launch_orca_slicer(orca_path, stl_files):
         # Create the command based on OS
         system = platform.system()
         if system == 'Darwin':  # macOS
+            # For macOS, use AppleScript to ensure files open in the same application instance
             if "BambuStudio" in orca_path:
-                cmd = ["open", "-a", "BambuStudio", "--args"] + stl_files
-                futil.log(f'macOS launch command for Bambu Studio: {cmd}')
+                app_name = "BambuStudio"
             else:
-                cmd = ["open", "-a", "OrcaSlicer", "--args"] + stl_files
-                futil.log(f'macOS launch command for Orca Slicer: {cmd}')
+                app_name = "OrcaSlicer"
+            
+            # First open the application
+            futil.log(f'Opening {app_name} on macOS')
+            subprocess.run(["open", "-a", app_name])
+            
+            # Give the application a moment to start
+            import time
+            time.sleep(2)
+            
+            # Create an AppleScript to open all files in the existing application
+            applescript = f'''
+            tell application "{app_name}"
+                activate
+            '''
+            
+            # Add each file to the script
+            for stl_file in stl_files:
+                # Convert to absolute path and escape any double quotes
+                abs_path = os.path.abspath(stl_file).replace('"', '\\"')
+                applescript += f'\n    open POSIX file "{abs_path}"'
+            
+            # Close the tell block
+            applescript += '''
+            end tell
+            '''
+            
+            futil.log(f'Executing AppleScript to open {len(stl_files)} files in {app_name}')
+            # Execute the AppleScript
+            subprocess.run(["osascript", "-e", applescript])
+            
+            futil.log(f'Opened {len(stl_files)} files in {app_name} (single session)')
+            return True
         else:  # Windows or other
             cmd = [orca_path] + stl_files
             futil.log(f'{system} launch command: {cmd}')
-        
-        # Launch Orca Slicer with the STL files
-        subprocess.Popen(cmd)
-        return True
+            
+            # Launch Orca Slicer with the STL files
+            subprocess.Popen(cmd)
+            return True
     except Exception as e:
         futil.log(f'Failed to launch Orca Slicer: {str(e)}')
         return False
