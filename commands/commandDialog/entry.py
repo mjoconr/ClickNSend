@@ -2,6 +2,7 @@ import adsk.core
 import os
 import tempfile
 import subprocess
+import platform
 from ...lib import fusionAddInUtils as futil
 from ... import config
 
@@ -10,7 +11,7 @@ ui = app.userInterface
 
 CMD_ID=f'{config.COMPANY_NAME}_{config.ADDIN_NAME}_entry'
 CMD_NAME='Send Geometry to Orca Slicer'
-CMD_DESCRIPTION='A Fusion Add-in that sends selected bodies/ components to Orca Slicer'
+CMD_DESCRIPTION='A Fusion Add-in That sends selected bodies/ components to Orca Slicer'
 
 # Specify that the command will be promoted to the toolbar
 IS_PROMOTED = True
@@ -115,10 +116,16 @@ def command_created(args: adsk.core.CommandEventArgs):
         # Create the export manager
         exportMgr = design.exportManager
         
-        # Path to Orca Slicer with proper escaping
-        orcaPath = r"C:\Program Files\OrcaSlicer\orca-slicer.exe" # Comment this line and uncomment next one if you want to use Bambu Studio
-        # orcaPath = r"C:\Program Files\Bambu Studio\bambu-studio.exe" # Change the path if your bambu-studio.exe is in another location.
-        futil.log(f'Using Orca Slicer path: {orcaPath}')
+        # Detect OS and set Orca Slicer path accordingly
+        system = platform.system()
+        if system == 'Darwin':  # macOS
+            orcaPath = "/Applications/OrcaSlicer.app/Contents/MacOS/orca-slicer"
+            # orcaPath = "/Applications/BambuStudio.app/Contents/MacOS/bambu-studio" # For Bambu Studio
+            futil.log(f'Detected macOS: Using Orca Slicer path: {orcaPath}')
+        else:  # Windows or other
+            orcaPath = r"C:\Program Files\OrcaSlicer\orca-slicer.exe"
+            # orcaPath = r"C:\Program Files\Bambu Studio\bambu-studio.exe" # For bambu studio
+            futil.log(f'Detected {system}: Using Orca Slicer path: {orcaPath}')
         
         # List to store all STL file paths
         stl_files = []
@@ -240,8 +247,18 @@ def launch_orca_slicer(orca_path, stl_files):
         
         futil.log(f'Launching Orca Slicer with {len(stl_files)} STL files')
         
-        # Create the command with all STL files as arguments
-        cmd = [orca_path] + stl_files
+        # Create the command based on OS
+        system = platform.system()
+        if system == 'Darwin':  # macOS
+            if "BambuStudio" in orca_path:
+                cmd = ["open", "-a", "BambuStudio", "--args"] + stl_files
+                futil.log(f'macOS launch command for Bambu Studio: {cmd}')
+            else:
+                cmd = ["open", "-a", "OrcaSlicer", "--args"] + stl_files
+                futil.log(f'macOS launch command for Orca Slicer: {cmd}')
+        else:  # Windows or other
+            cmd = [orca_path] + stl_files
+            futil.log(f'{system} launch command: {cmd}')
         
         # Launch Orca Slicer with the STL files
         subprocess.Popen(cmd)
