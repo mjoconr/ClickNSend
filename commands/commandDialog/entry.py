@@ -11,7 +11,7 @@ ui = app.userInterface
 
 CMD_ID=f'{config.COMPANY_NAME}_{config.ADDIN_NAME}_entry'
 CMD_NAME='Send Geometry to Orca Slicer'
-CMD_DESCRIPTION='A Fusion Add-in That sends selected bodies/ components to Orca Slicer'
+CMD_DESCRIPTION='A Fusion Add-in that sends selected bodies/ components to Orca Slicer'
 
 # Specify that the command will be promoted to the toolbar
 IS_PROMOTED = True
@@ -128,8 +128,9 @@ def command_created(args: adsk.core.CommandEventArgs):
             futil.log(f'Detected {system}: Using Orca Slicer path: {orcaPath}')
         
         # List to store all STL file paths
-        stl_files = []
+        export_files = []
         
+        STEP = 1
         # Export selected entities or fall back to root component
         if len(selectedComponents) > 0 or len(selectedBodies) > 0 or len(selectedOccurrences) > 0:
             # If components or bodies are selected, export only those
@@ -143,12 +144,22 @@ def command_created(args: adsk.core.CommandEventArgs):
                         try:
                             # Export each body in the component separately
                             for body in component.bRepBodies:
-                                stl_file = os.path.join(temp_dir, f"{body.name}_{bodiesExported}.stl")
-                                stlOptions = exportMgr.createSTLExportOptions(body, stl_file)
-                                if export_to_stl(exportMgr, stlOptions):
-                                    stl_files.append(stl_file)
-                                    bodiesExported += 1
-                                    futil.log(f'Successfully exported body: {body.name} from component: {component.name}')
+                                if (STEP == 1):
+                                    step_file = os.path.join(temp_dir, f"{body.name}_{bodiesExported}.stp")
+                                    stepOptions = exportMgr.createSTEPExportOptions(step_file)
+                                    if export_to_step(exportMgr, stepOptions):
+                                        export_files.append(step_file)
+                                        bodiesExported += 1
+                                        futil.log(f'Successfully exported body: {body.name} from component: {component.name}')
+
+                                else:
+                                    stl_file = os.path.join(temp_dir, f"{body.name}_{bodiesExported}.stl")
+                                    stlOptions = exportMgr.createSTLExportOptions(body, stl_file)
+                                    if export_to_stl(exportMgr, stlOptions):
+                                        export_files.append(stl_file)
+                                        bodiesExported += 1
+                                        futil.log(f'Successfully exported body: {body.name} from component: {component.name}')
+
                         except Exception as e:
                             futil.log(f'Error exporting component {component.name}: {str(e)}')
             
@@ -159,12 +170,21 @@ def command_created(args: adsk.core.CommandEventArgs):
                     try:
                         # Export each body in the occurrence separately
                         for body in occurrence.bRepBodies:
-                            stl_file = os.path.join(temp_dir, f"{body.name}_{bodiesExported}.stl")
-                            stlOptions = exportMgr.createSTLExportOptions(body, stl_file)
-                            if export_to_stl(exportMgr, stlOptions):
-                                stl_files.append(stl_file)
-                                bodiesExported += 1
-                                futil.log(f'Successfully exported body: {body.name} from occurrence: {occurrence.name}')
+                            if (STEP == 1):
+                                step_file = os.path.join(temp_dir, f"{body.name}_{bodiesExported}.stp")
+                                stepOptions = exportMgr.createSTEPExportOptions(step_file)
+                                if export_to_step(exportMgr, stepOptions):
+                                    export_files.append(step_file)
+                                    bodiesExported += 1
+                                    futil.log(f'Successfully exported body: {body.name} from component: {component.name}')
+                            else:
+                                stl_file = os.path.join(temp_dir, f"{body.name}_{bodiesExported}.stl")
+                                stlOptions = exportMgr.createSTLExportOptions(stl_file)
+                                if export_to_stl(exportMgr, stlOptions):
+                                    export_files.append(stl_file)
+                                    bodiesExported += 1
+                                    futil.log(f'Successfully exported body: {body.name} from occurrence: {occurrence.name}')
+
                     except Exception as e:
                         futil.log(f'Error exporting occurrence {occurrence.name}: {str(e)}')
             
@@ -173,18 +193,26 @@ def command_created(args: adsk.core.CommandEventArgs):
                 futil.log(f'Exporting {len(selectedBodies)} selected body(s)')
                 for body in selectedBodies:
                     try:
-                        stl_file = os.path.join(temp_dir, f"{body.name}_{bodiesExported}.stl")
-                        stlOptions = exportMgr.createSTLExportOptions(body, stl_file)
-                        if export_to_stl(exportMgr, stlOptions):
-                            stl_files.append(stl_file)
-                            bodiesExported += 1
-                            futil.log(f'Successfully exported body: {body.name}')
+                        if (STEP == 1):
+                            step_file = os.path.join(temp_dir, f"{body.name}_{bodiesExported}.stp")
+                            stepOptions = exportMgr.createSTEPExportOptions(step_file)
+                            if export_to_step(exportMgr, stepOptions):
+                                export_files.append(step_file)
+                                bodiesExported += 1
+                                futil.log(f'Successfully exported body: {body.name} from component: {component.name}')
+                        else:
+                            stl_file = os.path.join(temp_dir, f"{body.name}_{bodiesExported}.stl")
+                            stlOptions = exportMgr.createSTLExportOptions(body, stl_file)
+                            if export_to_stl(exportMgr, stlOptions):
+                                export_files.append(stl_file)
+                                bodiesExported += 1
+                                futil.log(f'Successfully exported body: {body.name}')
                     except Exception as e:
                         futil.log(f'Error exporting body {body.name}: {str(e)}')
             
             if bodiesExported > 0:
                 # Launch Orca Slicer with all exported STL files
-                launch_orca_slicer(orcaPath, stl_files)
+                launch_orca_slicer(orcaPath, export_files)
                 ui.messageBox(f'Exported {bodiesExported} bodies to Orca Slicer', 'Export Complete')
             else:
                 ui.messageBox('Unable to export the selected items. Please check the log for details.', 'Export Failed')
@@ -198,18 +226,28 @@ def command_created(args: adsk.core.CommandEventArgs):
                 
                 for i in range(allBodies.count):
                     body = allBodies.item(i)
-                    stl_file = os.path.join(temp_dir, f"{body.name}_{i}.stl")
-                    futil.log(f'Exporting body {i+1}/{allBodies.count}: {body.name}')
+                    if (STEP == 1):
+                        step_file = os.path.join(temp_dir, f"{body.name}_{i}.stp")
+                        futil.log(f'Exporting body {i+1}/{allBodies.count}: {body.name}')
+                        stepOptions = exportMgr.createSTEPExportOptions(step_file)
+
+                        if export_to_step(exportMgr, stepOptions):
+                            export_files.append(step_file)
+                            bodiesExported += 1
+                            futil.log(f'Successfully exported body: {body.name} from component: {component.name}')
+                    else:
+                        stl_file = os.path.join(temp_dir, f"{body.name}_{i}.stl")
+                        futil.log(f'Exporting body {i+1}/{allBodies.count}: {body.name}')
                     
-                    stlOptions = exportMgr.createSTLExportOptions(body, stl_file)
-                    if export_to_stl(exportMgr, stlOptions):
-                        stl_files.append(stl_file)
-                        bodiesExported += 1
-                        futil.log(f'Successfully exported body: {body.name}')
+                        stlOptions = exportMgr.createSTLExportOptions(body, stl_file)
+                        if export_to_stl(exportMgr, stlOptions):
+                            export_files.append(stl_file)
+                            bodiesExported += 1
+                            futil.log(f'Successfully exported body: {body.name}')
                 
                 if bodiesExported > 0:
                     # Launch Orca Slicer with all exported STL files
-                    launch_orca_slicer(orcaPath, stl_files)
+                    launch_orca_slicer(orcaPath, export_files)
                     ui.messageBox(f'Exported {bodiesExported} bodies from root component to Orca Slicer', 'Export Complete')
                 else:
                     ui.messageBox('No bodies were exported from root component', 'Export Failed')
@@ -238,28 +276,36 @@ def export_to_stl(exportMgr, stlOptions):
         futil.log(f'Export to STL failed with error: {str(e)}')
         return False
 
-# Helper function to launch Orca Slicer with a list of STL files
-def launch_orca_slicer(orca_path, stl_files):
+def export_to_step(exportMgr, stepOptions):
     try:
-        if not stl_files:
-            futil.log('No STL files to open')
+        result = exportMgr.execute(stepOptions)
+        return result
+    except Exception as e:
+        futil.log(f'Export to STEP failed with error: {str(e)}')
+        return False
+
+# Helper function to launch Orca Slicer with a list of STL files
+def launch_orca_slicer(orca_path, export_files):
+    try:
+        if not export_files:
+            futil.log('No bodies files to open')
             return False
         
-        futil.log(f'Launching Orca Slicer with {len(stl_files)} STL files')
+        futil.log(f'Launching Orca Slicer with {len(export_files)} bodies files')
         
         # Create the command based on OS
         system = platform.system()
         if system == 'Darwin':  # macOS
             if "BambuStudio" in orca_path:
-                cmd = ["open", "-a", "BambuStudio", "--args"] + stl_files
+                cmd = ["open", "-a", "BambuStudio", "--args"] + export_files
                 futil.log(f'macOS launch command for Bambu Studio: {cmd}')
             else:
-                cmd = ["open", "-a", "OrcaSlicer", "--args"] + stl_files
+                cmd = ["open", "-a", "OrcaSlicer", "--args"] + export_files
                 futil.log(f'macOS launch command for Orca Slicer: {cmd}')
         else:  # Windows or other
-            cmd = [orca_path] + stl_files
+            cmd = [orca_path] + export_files
             futil.log(f'{system} launch command: {cmd}')
-        
+
         # Launch Orca Slicer with the STL files
         subprocess.Popen(cmd)
         return True
