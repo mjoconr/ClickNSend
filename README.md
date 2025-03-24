@@ -16,7 +16,7 @@
     <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg" target="_blank" />
   </a>
 
-[Folder Structure](#folder-structure-of-the-repository)📂 | [Installation and Setup](#installation-and-setup)⚙️ | [Usage of ClickNSend](#usage-of-clicknsend)🏃| [Presentation Video](#presentation-video)📹 | [Changing the Slicer](#change_slicer) 🔁 | [Contact](#contact)📫 | [References](#references-and-other-software-tools)📖 
+[Folder Structure](#folder-structure-of-the-repository)📂 | [Installation and Setup](#installation-and-setup)⚙️ | [Usage of ClickNSend](#usage-of-clicknsend)🏃| [Presentation Video](#presentation-video)📹 | [Changing the Slicer and/ or File Format](#change_slicer_stl) 🔁 | [Contact](#contact)📫 | [References](#references-and-other-software-tools)📖 
 </div>
 
 ### Introduction <a name="introduction"></a>
@@ -114,7 +114,7 @@ __Note:__
     <img src="https://github.com/user-attachments/assets/e75340d7-da48-4b0d-aec2-30e0bb146eec" alt="Presentation4">
 </a>
 
-### How to change the Slicer from Orca Slicer to Another One (e.g., Bambu Studio) <a name="change_slicer"></a>
+### How to change the Slicer from Orca Slicer to Another One (e.g., Bambu Studio) or STL format to STEP <a name="change_slicer_stl"></a>
 
 <details>
 <summary>Click to expand changing the Slicer</summary> 
