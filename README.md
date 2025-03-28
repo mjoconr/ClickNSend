@@ -16,7 +16,7 @@
     <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg" target="_blank" />
   </a>
 
-[Folder Structure](#folder-structure-of-the-repository)📂 | [Installation and Setup](#installation-and-setup)⚙️ | [Usage of ClickNSend](#usage-of-clicknsend)🏃| [Presentation Video](#presentation-video)📹 | [Changing the Slicer](#change_slicer) 🔁 | [Contact](#contact)📫 | [References](#references-and-other-software-tools)📖 
+[Folder Structure](#folder-structure-of-the-repository)📂 | [Installation and Setup](#installation-and-setup)⚙️ | [Usage of ClickNSend](#usage-of-clicknsend)🏃| [Presentation Video](#presentation-video)📹 | [Changing the Slicer and/ or File Format](#change_slicer_stl) 🔁 | [Contact](#contact)📫 | [References](#references-and-other-software-tools)📖 
 </div>
 
 ### Introduction <a name="introduction"></a>
@@ -114,21 +114,32 @@ __Note:__
     <img src="https://github.com/user-attachments/assets/e75340d7-da48-4b0d-aec2-30e0bb146eec" alt="Presentation4">
 </a>
 
-### How to change the Slicer from Orca Slicer to Another One (e.g., Bambu Studio) <a name="change_slicer"></a>
+### How to change the Slicer from Orca Slicer to Another One (e.g., Bambu Studio) or STL format to STEP <a name="change_slicer_stl"></a>
 
 <details>
 <summary>Click to expand changing the Slicer</summary> 
   
-All you need to do is change [a single line](https://github.com/bankh/ClickNSend/blob/e733f0df66f99213e3aeaa9a870304c122c9e103/commands/commandDialog/entry.py#L119C9-L119C66) while leaving the rest of the code alone. 
-Change the following:
+All you need to do is change a single line [for macOS](https://github.com/bankh/ClickNSend/blob/c21b22b43f8babff8aacacc99e5f7cc5dc150736/commands/commandDialog/entry.py#L122) or [for Windows](https://github.com/bankh/ClickNSend/blob/c21b22b43f8babff8aacacc99e5f7cc5dc150736/commands/commandDialog/entry.py#L126) while leaving the rest of the code alone. 
+For Windows, change the following:
 ```
 orcaPath = r"C:\Program Files\OrcaSlicer\orca-slicer.exe"
 ```
 To the following:
 ```
-orcaPath = r"C:\Program Files\Bambu Studio\bambu-studio.exe"
+orcaPath = r"C:\Program Files\Bambu Studio\bambu-studio.exe" #for windows
 ```
-Please don't change the variable name since the rest of the program looks for it. If your installation path differs from the default settings, please change the location based on the location of the preferred slicer's executable file. After you click the ClickNSend in Fusion 360, Bambu Studio will ask whether you want them as a single object.  Say `No` if you want the sent objects as separate and you need to see something similar to:
+Or for macOS, change the following:
+```
+orcaPath = "/Applications/OrcaSlicer.app/Contents/MacOS/orca-slicer"
+```
+To the following:
+```
+orcaPath = "/Applications/BambuStudio.app/Contents/MacOS/BambuStudio"
+```
+
+In addition, the users can utilize STEP files instead of STL by changing [STEP=1](https://github.com/bankh/ClickNSend/blob/c21b22b43f8babff8aacacc99e5f7cc5dc150736/commands/commandDialog/entry.py#L133) (for using STEP format) and STEP=0 (for using STL format). The multi-body aspects of the STEP file are slightly different inside the Orca slicer compared to the STL one.
+
+Please don't change the variable name since the rest of the program looks for it. If your installation path differs from the default settings, please change the location based on the location of the preferred slicer's executable file. After you click the ClickNSend in Fusion 360 (STEP=0, STL export case), Bambu Studio will ask whether you want them as a single object.  Say `No` if you want the sent objects as separate and you need to see something similar to:
 ![Fusion360_vAEfnJZvPP](https://github.com/user-attachments/assets/d303866d-97c9-420d-98c5-a1a5870adc5e)
 
 </details>
